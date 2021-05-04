@@ -19,7 +19,7 @@
     <a href="?modulo=comodidades&acao=listar"> Comodidades </a>  
     <a href="?modulo=tipos_imoveis&acao=listar"> Tipos de ímoveis </a>  
 </nav>
-<footer style="text-align: center;">Feito por <a href="github.com/lumamontes">Luma</a> <br>
+<footer style="text-align: center;">Feito por <a href="https://github.com/lumamontes">Luma</a> <br>
 <small>Faculdade Meta - 2021</small>
 </footer>
 
