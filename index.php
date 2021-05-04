@@ -10,20 +10,22 @@
 
 <body>
 <header class="sidenav">
-    Logo
-    
-<nav >
+<i class="fas fa-globe logo"></i>    
+<nav>
     <a href="?modulo=dashboard&acao=ver"> Ínicio</a>  
     <a href="?modulo=cliente&acao=listar"> Usuários </a>  
-    <a href="?modulo=imoveis&acao=listar"> Imoveís </a>  
+    <a href="?modulo=imoveis&acao=listar"> Imóveis </a>  
     <a href="?modulo=reservas&acao=listar"> Reservas </a>  
     <a href="?modulo=comodidades&acao=listar"> Comodidades </a>  
     <a href="?modulo=tipos_imoveis&acao=listar"> Tipos de ímoveis </a>  
 </nav>
-<footer>Feito por <a href="github.com/lumamontes">Luma</a></footer>
+<footer style="text-align: center;">Feito por <a href="github.com/lumamontes">Luma</a> <br>
+<small>Faculdade Meta - 2021</small>
+</footer>
+
 </header>
 
-<div class='content main'>
+<div class='models-container main'>
 
 <?php
 if(isset($_GET['modulo'])){ $modulo = $_GET['modulo'];}else{ $modulo = "dashboard"; }
@@ -33,7 +35,6 @@ include("modulos/".$modulo."/".$acao.".php");
         
 ?>
 
-Faculdade Meta - 2021
 </div>
 </body>
 </html>

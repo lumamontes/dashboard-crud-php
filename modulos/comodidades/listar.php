@@ -8,10 +8,10 @@
 ?>
 <main>
 <div class="title-container">
-    <h1>Cadastros </h1>
-    <a class="button add" href="?modulo=cliente&acao=adicionar"><i class="fas fa-plus"></i> ADICIONAR</a> 
+    <h1>Comodidades </h1>
+    <a class="button add" href="?modulo=comodidades&acao=adicionar"><i class="fas fa-plus"></i> ADICIONAR</a> 
 </div>
-<div class="container">
+<div class="container" id="comodidades">
     <div class="info-container">
         <div>ID</div>
         <div>NOME</div>
@@ -24,8 +24,8 @@
         <div class="content-container">
             <div><?php echo $comodidade['id'];?></div>
             <div><?php echo $comodidade['nome'];?></div>
-            <div><a class="button edit" href="?modulo=cliente&acao=editar&id=<?php echo $comodidade['id'];?>"><i class="fas fa-edit"></i> EDITAR </a></div>
-            <div><a class="button delete" href="?modulo=cliente&acao=excluir&id=<?php echo $comodidade['id'];?>"><i class="fas fa-trash-alt"></i> EXCLUIR </a></div>    
+            <div><a class="button edit" href="?modulo=comodidades&acao=editar&id=<?php echo $comodidade['id'];?>"><i class="fas fa-edit"></i> EDITAR </a>
+            <a class="button delete" href="?modulo=comodidades&acao=excluir&id=<?php echo $comodidade['id'];?>"><i class="fas fa-trash-alt"></i> EXCLUIR </a></div>    
         </div>
     <?php 
     }

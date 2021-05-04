@@ -1,58 +1,44 @@
-<?php include('config/DB.php');?>
 <?php
-if(isset($_POST["botao"]) && $_POST["botao"] == "Salvar" ){ 
-    $id = $_POST['id_cliente'];
-    $nome = $_POST['nome'];
-    $email = $_POST['email'];
-    $telefone = $_POST['telefone'];
+include('config/DB.php');
+if(isset($_POST["botao"]) && $_POST["botao"] == "Salvar"){ 
+    $id = $_POST['id'];
+    $usuario_id = $_POST['usuario_id'];
+    $data_entrada = $_POST['data_entrada'];
+    $data_saida = $_POST['data_saida'];
 
-    $sql = "UPDATE cliente SET 
-            nome   = :nome,
-            email   = :email,
-            telefone = :telefone
-            
-        WHERE   id_cliente  = :id_cliente";
-
-    $stmt = DB::conexao()->prepare($sql);
+    $sql = "UPDATE reservas SET usuario= :usuario_id, data_entrada=:data_entrada, data_saida, :data_saida WHERE id=:id";
+    $stmt = DB::Conexao()->prepare($sql);
     $stmt->bindParam(':nome', $nome);
-    $stmt->bindParam(':email', $email);
-    $stmt->bindParam(':telefone', $telefone);
-    $stmt->bindParam(':id_cliente', $id);
+    $stmt->bindParam(':id', $id);
     $stmt->execute();    
+    echo "Registro editado com sucesso!";
+
     }
-
-
 ?>
-
-
-
+ 
 <?php 
     if(isset($_GET['id']) && is_numeric($_GET['id'])){
         $id = $_GET['id'];
-
-        $sql = "SELECT * FROM cliente WHERE id_cliente = :id";
-
+        $sql = "SELECT * FROM reservas WHERE id = :id";
         $stmt = DB::Conexao()->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
-        $cliente = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
+        $reserva = $stmt->fetchAll(PDO::FETCH_ASSOC);       
 ?>
-
-<form method='post' action=''>
-Nome:      
-<input type="text" name='nome' value='<?php echo $cliente[0]['nome']?>'></br>
-
-Email:          
-<input type="text" name='email' value='<?php echo $cliente[0]['email']?>'></br>
-
-Telefone:     
-<input type="text" name='telefone' value='<?php echo $cliente[0]['telefone']?>'></br>
-
-<input type='hidden' name='id_cliente' value='<?php echo $cliente[0]['id_cliente']?>'>
-<input type='submit' name='botao' value='Salvar'>
+<h1>Editar reserva</h1>
+<div class="form-container">
+<form method='post' action='' class="form">
+   <h2>Editar</h2>  <br>
+    <label for="nome">
+     <input type="text" name='nome' value="<?php echo $reserva[0]['usuario_id']?>">
+     <input type="text" name='nome' value="<?php echo $reserva[0]['data_entrada']?>">
+     <input type="text" name='nome' value="<?php echo $reserva[0]['data_saida']?>">
+    <input type='hidden' name='id' value='<?php echo $reserva[0]['id']?>'>
+</label>
+<input class="button" type='submit' name='botao' value='Salvar'>
 
 </form>
+</div>
 <?php       
 
     }

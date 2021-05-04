@@ -1,58 +1,39 @@
-<?php include('config/DB.php');?>
 <?php
+include('config/DB.php');
 if(isset($_POST["botao"]) && $_POST["botao"] == "Salvar" ){ 
-    $id = $_POST['id_cliente'];
+    $id = $_POST['id'];
     $nome = $_POST['nome'];
-    $email = $_POST['email'];
-    $telefone = $_POST['telefone'];
-
-    $sql = "UPDATE cliente SET 
-            nome   = :nome,
-            email   = :email,
-            telefone = :telefone
-            
-        WHERE   id_cliente  = :id_cliente";
-
-    $stmt = DB::conexao()->prepare($sql);
+    $sql = "UPDATE comodidades SET nome=:nome WHERE id=:id";
+    $stmt = DB::Conexao()->prepare($sql);
     $stmt->bindParam(':nome', $nome);
-    $stmt->bindParam(':email', $email);
-    $stmt->bindParam(':telefone', $telefone);
-    $stmt->bindParam(':id_cliente', $id);
-    $stmt->execute();    
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
+    echo "Registro editado com sucesso!";
     }
-
-
 ?>
-
-
 
 <?php 
     if(isset($_GET['id']) && is_numeric($_GET['id'])){
         $id = $_GET['id'];
-
-        $sql = "SELECT * FROM cliente WHERE id_cliente = :id";
-
+        $sql = "SELECT * FROM comodidades WHERE id = :id";
         $stmt = DB::Conexao()->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
-        $cliente = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
+        $comodidade = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<form method='post' action=''>
-Nome:      
-<input type="text" name='nome' value='<?php echo $cliente[0]['nome']?>'></br>
+<h1>Editar Comodidade</h1>
+<div class="form-container">
+<form method='post' action='' class="form">
+   <h2>Editar</h2>  <br>
+    <label for="nome">
+        <input type="text" name='nome' value="<?php echo $comodidade[0]['nome']?>">
+        <input type='hidden' name='id' value='<?php echo $comodidade[0]['id']?>'>
 
-Email:          
-<input type="text" name='email' value='<?php echo $cliente[0]['email']?>'></br>
-
-Telefone:     
-<input type="text" name='telefone' value='<?php echo $cliente[0]['telefone']?>'></br>
-
-<input type='hidden' name='id_cliente' value='<?php echo $cliente[0]['id_cliente']?>'>
-<input type='submit' name='botao' value='Salvar'>
-
+    </label>
+<input class="button" type='submit' name='botao' value='Salvar'>
 </form>
+</div>
 <?php       
 
     }
